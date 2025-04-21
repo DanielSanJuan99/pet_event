@@ -1,15 +1,16 @@
 package com.events.petevents.controller;
 
-import com.events.petevents.exception.EventoNotFound;
+// import com.events.petevents.exception.EventoNotFound;
 import com.events.petevents.model.Evento;
+import com.events.petevents.model.ResponseWrapper;
 import com.events.petevents.service.EventoService;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
+
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -23,13 +24,23 @@ public class EventoController {
     }
 
     @GetMapping
-    public List<Evento> getAllEvents() {
-        return eventoService.getAllEvents();
+    public ResponseEntity<?> getAllEvents() {
+        List<Evento> eventos = eventoService.getAllEvents();
+
+        if (eventos.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay usuarios registrados.");
+        }
+
+        return ResponseEntity.ok(
+            new ResponseWrapper<>(
+                "OK",
+                eventos.size(),
+                eventos
+            ));
     }
 
     @GetMapping("/{id}")
     public Evento getEventoById(@PathVariable Long id) {
-        return eventoService.getEventoById(id)
-                .orElseThrow(() -> new EventoNotFound(id));
+        return eventoService.getEventoById(id);
     }
 }

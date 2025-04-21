@@ -8,7 +8,4 @@ import com.events.petevents.model.Evento;
 public interface EventoRepository extends JpaRepository<Evento, Long> {
     // No es necesario agregar métodos adicionales, ya que JpaRepository proporciona
     // métodos CRUD básicos.
-
-
-    
 }
