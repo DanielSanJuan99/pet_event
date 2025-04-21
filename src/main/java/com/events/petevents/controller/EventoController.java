@@ -28,7 +28,7 @@ public class EventoController {
         List<Evento> eventos = eventoService.getAllEvents();
 
         if (eventos.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay usuarios registrados.");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay eventos registrados.");
         }
 
         return ResponseEntity.ok(

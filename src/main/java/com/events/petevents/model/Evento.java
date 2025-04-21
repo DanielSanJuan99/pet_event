@@ -42,20 +42,6 @@ public class Evento {
     @NotNull(message = "La fecha no puede ser nula")
     private String fecha;
 
-    @NotBlank(message = "La hora de inicio no puede estar vacía")
-    @FutureOrPresent(message = "La hora de inicio debe ser presente o futura")
-    @Min(8) // Hora de inicio del evento debe ser mayor o igual a 9
-    @Max(19) // Hora de inicio del evento debe ser menor o igual a 19
-    @NotNull(message = "La hora de inicio no puede ser nula")
-    private String hora_inicio;
-
-    @NotBlank(message = "La hora de termino no puede estar vacía")
-    @FutureOrPresent(message = "La hora de termino debe ser presente o futura")
-    @Min(12) // Hora de termino del evento debe ser mayor o igual a 12
-    @Max(23) // Hora de termino del evento debe ser menor o igual a 23
-    @NotNull(message = "La hora de termino no puede ser nula")
-    private String hora_fin;
-
     @NotBlank(message = "El lugar no puede estar vacío")
     @Size(min = 5, max = 200, message = "El lugar del evento debe tener entre 5 y 200 caracteres")
     private String lugar;
