@@ -1,10 +1,10 @@
 package com.events.petevents.controller;
 
+import com.events.petevents.exception.EventoNotFound;
 import com.events.petevents.model.Evento;
 import com.events.petevents.service.EventoService;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +28,8 @@ public class EventoController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Evento> getEventoById(@PathVariable Long id) {
-        return eventoService.getEventoById(id);
+    public Evento getEventoById(@PathVariable Long id) {
+        return eventoService.getEventoById(id)
+                .orElseThrow(() -> new EventoNotFound(id));
     }
 }

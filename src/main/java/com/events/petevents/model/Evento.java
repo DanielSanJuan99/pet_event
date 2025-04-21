@@ -5,10 +5,14 @@ import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
+@Entity
+@Table(name = "eventos")
 public class Evento {
     @Id
     private Long id;

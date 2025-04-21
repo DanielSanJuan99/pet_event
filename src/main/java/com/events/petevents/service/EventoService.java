@@ -6,8 +6,20 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 
+// Importando la clase EventoRepository para manejar la persistencia de datos
+import com.events.petevents.repository.EventoRepository;
+
+// Importando la clase EventoNotFound para manejar excepciones
+import com.events.petevents.exception.EventoNotFound;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 @Service
 public class EventoService {
+
+    @Autowired
+    private EventoRepository repo;
+    
     
     private List<Evento> eventos = new ArrayList<>();
 
@@ -22,8 +34,17 @@ public class EventoService {
     public List<Evento> getAllEvents() {
         return eventos;
     }
+    // public List<Evento> getAllEvents() {
+    //     return repo.findAll();
+    // }
 
     public Optional<Evento> getEventoById(Long id) {
         return eventos.stream().filter(e -> e.getId().equals(id)).findFirst();
     }
+
+    // public Evento buscarEventoPorId(Long id) {
+    //     return repo.findById(id)
+    //             .orElseThrow(() -> new EventoNotFound(id));
+    // }
+
 }
