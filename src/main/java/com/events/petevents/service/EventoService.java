@@ -21,22 +21,24 @@ public class EventoService {
 
     // Recuperar todos los Eventos
     public List<Evento> getAllEvents() {
+        log.debug("Servicio: getAllEvents()");
         return repo.findAll(Sort.by("id")
             .ascending());
     }
 
     // Recuperar Evento por ID
     public Evento getEventoById(Long id) {
+        log.debug("Servicio: getEventoById({})", id);
         return repo.findById(id)
                 .orElseThrow(() -> new EventoNotFound(id));
     }
 
     // Crear Evento nuevo
     public Evento createEvento(Evento evento) {
-
+        log.debug("Servicio: createEvento({})", evento.getNombre());
         if (repo.existsById(evento.getId())) {
             log.error("Evento con ID ya existe: " + evento.getId());
-            throw new EventoNotFound(evento.getId());
+            throw new IllegalArgumentException("Ya existe evento con ID" + evento.getId());
         }
 
         return repo.save(evento);
@@ -44,7 +46,7 @@ public class EventoService {
 
     // Actualizar Evento por ID
     public Evento updateEvento(Long id, Evento eventoUpdt) {
-
+        log.debug("Servicio: updateEvento({})", id, eventoUpdt.getNombre());
         Evento eventoExiste = repo.findById(id)
                 .orElseThrow(() -> new EventoNotFound(id));
 
@@ -61,6 +63,7 @@ public class EventoService {
 
     // Eliminar Evento por ID
     public void deleteEvento(Long id) {
+        log.debug("Servicio: deleteEvento({})", id);
         Evento evento = repo.findById(id)
                 .orElseThrow(() -> new EventoNotFound(id));
         repo.delete(evento);
