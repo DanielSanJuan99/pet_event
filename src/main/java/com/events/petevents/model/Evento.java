@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 import jakarta.validation.constraints.*;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -37,10 +38,8 @@ public class Evento {
     @Size(min = 10, max = 500, message = "La descripción del evento debe tener entre 10 y 500 caracteres")
     private String descripcion;
 
-    @NotBlank(message = "La fecha no puede estar vacía")
     @Future(message = "La fecha debe ser futura")
-    @NotNull(message = "La fecha no puede ser nula")
-    private String fecha;
+    private LocalDate fecha;
 
     @NotBlank(message = "El lugar no puede estar vacío")
     @Size(min = 5, max = 200, message = "El lugar del evento debe tener entre 5 y 200 caracteres")
