@@ -1,6 +1,5 @@
 package com.events.petevents.controller;
 
-// import com.events.petevents.exception.EventoNotFound;
 import com.events.petevents.model.Evento;
 import com.events.petevents.model.ResponseWrapper;
 import com.events.petevents.service.EventoService;
