@@ -19,6 +19,10 @@ public class EventoService {
     @Autowired
     private EventoRepository repo;
 
+    public EventoService(EventoRepository eventoRepository) {
+        this.repo = eventoRepository;
+    }
+
     // Recuperar todos los Eventos
     public List<Evento> getAllEvents() {
         log.debug("Servicio: getAllEvents()");
